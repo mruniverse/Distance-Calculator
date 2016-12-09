@@ -7,20 +7,14 @@
 using namespace std;
 
 //SPLIT=========================================================================
-void split(const string &s, char delim, vector<string> &elems) {
-    stringstream ss;
-    ss.str(s);
-    string item;
-    while (getline(ss, item, delim)) {
-        elems.push_back(item);
-    }
-}
-
-
 vector<string> split(const string &s, char delim) {
-    vector<string> elems;
-    split(s, delim, elems);
-    return elems;
+    stringstream ss(s);
+    string item;
+    vector<string> tokens;
+    while (getline(ss, item, delim)) {
+        tokens.push_back(item);
+    }
+    return tokens;
 }
 //SPLIT=========================================================================
 
