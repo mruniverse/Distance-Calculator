@@ -54,8 +54,7 @@ string postal(int pcode){
         string initials = line.substr(ref3 + 1, line.length());
 
         if(pcode >= code1 && pcode <= code2){
-            city += "-";
-            Rstring = city + initials;
+            Rstring = city + "-" + initials;
             break;
         }
     }
@@ -78,7 +77,7 @@ float distance(int pcode1, int pcode2){
     float PI = 3.1415926536;
     float lat1,long1,lat2,long2;
     float distance;
-
+    
     fstream archive;
     archive.open("municipios_br.csv", ios::in);
     city = postal(pcode1);
@@ -86,7 +85,7 @@ float distance(int pcode1, int pcode2){
     while(archive.good()){
         getline(archive, line);
         vector<string> tokens = split(line, ';');
-        address1 = tokens[3] + tokens[4];
+        address1 = tokens[3] + "-" + tokens[4];
         lat1 = stof(tokens[1]);
         long1 = stof(tokens[2]);
 
@@ -105,7 +104,7 @@ float distance(int pcode1, int pcode2){
     while(archive.good()){
         getline(archive, line);
         vector<string> tokens = split(line, ';');
-        address2 = tokens[3] + tokens[4];
+        address2 = tokens[3] + "-" + tokens[4];
         lat2 = stof(tokens[1]);
         long2 = stof(tokens[2]);
 
