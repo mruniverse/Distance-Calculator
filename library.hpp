@@ -77,7 +77,7 @@ float distance(int pcode1, int pcode2){
     float PI = 3.1415926536;
     float lat1,long1,lat2,long2;
     float distance;
-    
+
     fstream archive;
     archive.open("municipios_br.csv", ios::in);
     city = postal(pcode1);
