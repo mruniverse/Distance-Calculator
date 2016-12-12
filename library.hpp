@@ -113,7 +113,6 @@ float distance(int pcode1, int pcode2){
         }
     }
 
-
     //CONVERSION: DEGREES TO RADIANS============================================
     lat1 = lat1 * PI/180;
     long2 = long2 * PI/180;
