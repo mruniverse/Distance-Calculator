@@ -149,3 +149,63 @@ void write(int code1, int code2){
     archive.close();
 }
 //WRITE DISTANCES ON THE ARCHIVE================================================
+
+
+void functionality1(void){
+    int postal1,postal2; //Entry postal code
+
+    cout << "Inform the Source Code: \n";
+    cin >> postal1;
+    cout << "Inform the Destination Code: \n";
+    cin >> postal2;
+
+    printf("%s -> %s : %f KM\n",postal(postal1).c_str(), postal(postal2).c_str(), distance(postal1, postal2));
+
+}
+
+void functionality2(void){
+    string title;
+    string line;
+    int c = 0;
+
+    cout << "Type the archive's name(with the extention): ";
+    cin >> title;
+
+    fstream archive2;
+    archive2.open(title.c_str(), (ios::trunc));
+
+    while(archive2.good()){
+        getline(archive2, line);
+        c++;
+    }
+    cout << endl;
+    int code[c];
+
+
+    //SETTING THE ARCHIVE BACK TO THE BEGINNING=================================
+    archive2.clear();
+    archive2.seekg(0, ios::beg);
+    //SETTING THE ARCHIVE BACK TO THE BEGINNING=================================
+
+    c = 0;
+    while(archive2.good()){
+        archive2 >> code[c];
+        c++;
+    }
+
+    for(int i = 0; i < c; i++){
+        for(int j = i + 1; j < c - 1; j++){
+
+            printf("%s;%d;%s;%d; %.3f KM\n"
+            , postal(code[i]).c_str(), code[i]
+            , postal(code[j]).c_str(), code[j]
+            , distance(code[i], code[j]));
+
+            write(code[i], code[j]);
+        }
+    }
+
+    cout << "\nThe Distances was saved with success " << endl;
+
+    archive2.close();
+}
