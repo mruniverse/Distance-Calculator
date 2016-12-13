@@ -2,13 +2,9 @@
 #define FUNCTION_HPP
 
 #include <iostream>
-#include "functionality1.hpp"
-#include "functionality2.hpp"
+#include "library.hpp"
 
 using namespace std;
-
-void functionality1(void);
-void functionality2(void);
 
 int main(){
     int choice;
@@ -20,7 +16,15 @@ int main(){
 
     cin >> choice;
 
-    // functionality1(void);
+    switch(choice){
+        case 1:
+            functionality1();
+            break;
+        case 2:
+            functionality2();
+            break;
+    }
+
 
     return 0;
 }
