@@ -138,15 +138,15 @@ float distance(int pcode1, int pcode2){
 
 
 //WRITE DISTANCES ON THE ARCHIVE================================================
-void write(int code1, int code2){
-    fstream archive;
-    archive.open("distances.csv", ios::app | ios::out);
+void write(int code1, int code2, fstream *archive){
+    // fstream archive;
+    // archive.open("distances.csv", ios::out | ios::app);
 
-    archive << postal(code1) << ";" << code1 << ";";
-    archive << postal(code2) << ";" << code2 << "; ";
-    archive << fixed << setprecision(3) << distance(code1, code2) << " KM\n";
+    *archive << postal(code1) << ";" << code1 << ";";
+    *archive << postal(code2) << ";" << code2 << "; ";
+    *archive << fixed << setprecision(3) << distance(code1, code2) << " KM\n";
 
-    archive.close();
+    // archive.close();
 }
 //WRITE DISTANCES ON THE ARCHIVE================================================
 
@@ -171,11 +171,11 @@ void functionality2(void){
     cout << "Type the archive's name(with the extention): ";
     cin >> title;
 
-    fstream archive2;
-    archive2.open(title.c_str(), (ios::trunc));
+    fstream archive;
+    archive.open(title.c_str(), ios::in);
 
-    while(archive2.good()){
-        getline(archive2, line);
+    while(archive.good()){
+        getline(archive, line);
         c++;
     }
     cout << endl;
@@ -183,29 +183,31 @@ void functionality2(void){
 
 
     //SETTING THE ARCHIVE BACK TO THE BEGINNING=================================
-    archive2.clear();
-    archive2.seekg(0, ios::beg);
+    archive.clear();
+    archive.seekg(0, ios::beg);
     //SETTING THE ARCHIVE BACK TO THE BEGINNING=================================
 
     c = 0;
-    while(archive2.good()){
-        archive2 >> code[c];
+    while(archive.good()){
+        archive >> code[c];
         c++;
     }
 
+    fstream archive2;
+    archive2.open("distances.csv", ios::out | ios::trunc);
     for(int i = 0; i < c; i++){
         for(int j = i + 1; j < c - 1; j++){
-
             printf("%s;%d;%s;%d; %.3f KM\n"
             , postal(code[i]).c_str(), code[i]
             , postal(code[j]).c_str(), code[j]
             , distance(code[i], code[j]));
 
-            write(code[i], code[j]);
+            write(code[i], code[j], &archive2);
         }
     }
+    archive2.close();
 
     cout << "\nThe Distances was saved with success " << endl;
 
-    archive2.close();
+    archive.close();
 }

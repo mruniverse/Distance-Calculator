@@ -12,7 +12,7 @@ int main(){
     cout << "What do you wanna do ?" << endl;
     cout << "[1] - Individual Calculation" << endl;
     cout << "[2] - Multiple Calculation" << endl;
-    cout << ": ";
+    cout << "Option number : ";
 
     cin >> choice;
 
