@@ -44,8 +44,12 @@ int main(){
             , postal(code[i]).c_str(), code[i]
             , postal(code[j]).c_str(), code[j]
             , distance(code[i], code[j]));
+
         }
     }
+
+    fstream distance;
+    distance.open("distances.csv", ios::app | ios::out);
 
     archive.close();
 
