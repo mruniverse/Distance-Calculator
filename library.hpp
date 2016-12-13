@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <math.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -134,3 +135,17 @@ float distance(int pcode1, int pcode2){
     return distance;
 }
 //CALCULATE THE DISTANCE========================================================
+
+
+//WRITE DISTANCES ON THE ARCHIVE================================================
+void write(int code1, int code2){
+    fstream archive;
+    archive.open("distances.csv", ios::app | ios::out);
+
+    archive << postal(code1) << ";" << code1 << ";";
+    archive << postal(code2) << ";" << code2 << "; ";
+    archive << fixed << setprecision(3) << distance(code1, code2) << " KM\n";
+
+    archive.close();
+}
+//WRITE DISTANCES ON THE ARCHIVE================================================
